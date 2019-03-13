@@ -1,0 +1,53 @@
+.input_box {
+    border: 2px solid #16174f;
+    margin: 10px auto;
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inputs {
+    display:flex;
+    flex-direction: column;
+}
+
+.button_container {
+    text-align: end;
+    margin-top: 20px;
+}
+
+.btn {
+    font-family: Roboto;
+    max-width: 150px;
+    background: #963019;
+    color: #f6f1ed;
+    border: 1px solid transparent;
+}
+
+.btn__big {
+    font-size: 19px;
+    font-weight: 700;
+    padding: 7px 15px;
+    margin: 30px auto;
+}
+
+.btn__small {
+    margin-left: 9px;
+}
+
+.label_container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+label {
+    font-family: Roboto;
+    margin-right: 9px;
+    width: 39.5%;
+    text-align: left;
+}
+
+input, select {
+    border: 1px solid transparent;
+}
