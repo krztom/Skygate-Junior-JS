@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import Dexie from "dexie";
 import "./FormBuilder.css";
-import SubInputBlock from '../../components/Inputs/Inputs';
-
+import SubinputBlock from "../../components/Inputs/Inputs";
 
 class FormBuilder extends Component {
   constructor() {
@@ -12,27 +11,23 @@ class FormBuilder extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log("test-mountttt");
-
-  }
+  componentDidMount() {}
 
   componentDidUpdate() {
+    console.log(this.state);
     const currentStateJSON = JSON.stringify(this.state);
-    console.log(currentStateJSON);
+    // console.log(currentStateJSON);
 
-    const db = new Dexie('FormsBuilderDB');
-    db.version(1).stores({ inputs: '++id' });
+    const db = new Dexie("FormsBuilderDB");
+    db.version(1).stores({ inputs: "++id" });
 
     db.table("inputs").toArray();
     db.inputs
-    .put(this.state)
-    .then(function() {
-
-    })
-    .catch(function(error) {
+      .put(this.state)
+      .then(function() {})
+      .catch(function(error) {
         alert("Ooops: " + error);
-    });
+      });
   }
 
   QuestionChangeHandler = idx => evt => {
@@ -44,29 +39,37 @@ class FormBuilder extends Component {
     this.setState({ input: newInput });
   };
 
-    SelectChangeHandler = idx => evt => {
-        const newInput = this.state.input.map((input, sidx) => {
-            if (idx !== sidx) return input;
-            return { ...input, type: evt.target.value };
-        });
-
-        this.setState({ input: newInput });
-    };
-
-
-  AddInputBoxHandler = () => {
-    this.setState({
-      input: this.state.input.concat([{ question: "", type: "" }])
+  SelectChangeHandler = idx => evt => {
+    const newInput = this.state.input.map((input, sidx) => {
+      if (idx !== sidx) return input;
+      return { ...input, type: evt.target.value };
     });
+
+    this.setState({ input: newInput });
   };
 
-
+  AddInputBoxHandler = () => {
+    this.setState(prevState => ({
+      input: [...prevState.input, { question: "", type: "", children: [] }]
+    }));
+  };
 
   RemoveInputBoxHandler = index => () => {
     this.setState({
       input: this.state.input.filter((s, sidx) => index !== sidx)
     });
   };
+
+  AddSubInputBoxHandler = idx => () => {
+    const inputChildreen = this.state.input.map((input, sidx) => {
+      if (idx !== sidx) return input;
+      return { ...input, children: [{ question: "", type: "", children: []}] };
+    });
+
+
+    this.setState({ input: inputChildreen });
+    console.log(inputChildreen);
+  }
 
   render() {
     return (
@@ -97,7 +100,7 @@ class FormBuilder extends Component {
               <div className="button_container">
                 <button
                   className="btn btn__small"
-                  onClick={this.AddSubInputBoxHandler}
+                  onClick={this.AddSubInputBoxHandler(index)}
                 >
                   Add Sub-input
                 </button>
@@ -112,7 +115,6 @@ class FormBuilder extends Component {
           </div>
         ))}
 
-        
         <button
           type="button"
           onClick={this.AddInputBoxHandler}
@@ -120,9 +122,10 @@ class FormBuilder extends Component {
         >
           Add input
         </button>
+        <SubinputBlock />
       </div>
     );
   }
 }
-    
-    export default FormBuilder;
+
+export default FormBuilder;

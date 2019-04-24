@@ -1,0 +1,13 @@
+1. Przeniosieć boxa do osobnego komponentu funkcyjnego
+2. Zmienie sposób dodawania komponentu przez funkcje on click
+3. State ma przyjac format tablicy obiektów z załączonego pliku
+4. Stworzenie
+5. Na początku komponentu powinnna być funkcja która sprawdzi aktualny state i wyrenderuje formularz na podstawie akutalnego state
+6. Opcjonalnie  osobny komponent Class, ktory będzie miał state jednego obiektu z dziećmi
+7. Conditions elementu child renderowane switchem w zaleznosci od pola type w parencie
+8. button subinput srawdza index elementu w którym kliknieto button i dodaje element children do tablicy danego obiektu
+
+
+
+https://engineering.tripping.com/building-an-recursive-nested-dropdown-component-in-react-b1c883e06ac4
+stworznie submmenu w react
